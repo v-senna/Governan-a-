@@ -3,17 +3,9 @@ import "./globals.css";
 import Sidebar from "@/components/layout/Sidebar";
 
 export const metadata: Metadata = {
-  title: "RiskGov AI — Plataforma de Governança de IA & Risco Financeiro",
+  title: "RiskGov — Cenários de governança de dados",
   description:
-    "Simulação, prevenção e avaliação de risco financeiro de vazamentos de dados. Inspirado no EU AI Act e LGPD. Motor de risco em R$ com IA plugável.",
-  keywords: [
-    "governança de IA",
-    "risco financeiro",
-    "vazamento de dados",
-    "LGPD",
-    "EU AI Act",
-    "segurança da informação",
-  ],
+    "Demonstração educativa com cenários sintéticos para explorar correlações de dados e controles de prevenção.",
   robots: { index: true, follow: true },
 };
 

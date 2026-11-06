@@ -22,9 +22,9 @@ Essas referências não validam os valores monetários, tempos-alvo, severidades
 
 ## Cálculo, confiança e resposta
 
-Os números `lowBRL` e `highBRL` são parâmetros fictícios escolhidos para exercitar a interface. Não são calculados a partir de estatísticas públicas, multas legais, número de titulares ou custos reais. Não exiba esses valores como “previsão”, “perda provável” ou “custo médio”. Para estimar custos de uma organização, substituir por dados internos auditáveis (resposta técnica, jurídico, indisponibilidade, notificações, churn), premissas revisadas por especialistas e faixa de incerteza documentada.
+A versão simplificada não exibe números financeiros. O simulador legado usa custos base por registro, percentuais de centro de custo e fatores de cauda que não foram calibrados com dados de incidentes; por isso, não devem ser exibidos como previsão, mediana, percentil ou multa. Uma estimativa corporativa exigiria custos internos auditáveis, premissas revisadas por especialistas e incerteza documentada.
 
-O campo de confiança tem `score: null` intencionalmente: não há conjunto rotulado nem validação para alegar acurácia. Tempo de resposta é meta didática do exercício, não previsão de detecção nem prazo regulatório. A saída do LLM deve ser apresentada como sugestão gerada, revisada por pessoa; não deve determinar risco legal ou notificação automaticamente.
+Não há pontuação de confiança calibrada. O tempo mostrado na ficha de cada cenário é uma meta didática de exercício; não prevê detecção nem define prazo regulatório. A saída de um LLM, se for habilitada em outro ambiente, deve ser tratada como sugestão para revisão humana.
 
 ## Casos reais
 

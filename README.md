@@ -7,6 +7,7 @@ Aplicação Next.js para explorar governança de dados e cenários simulados de 
 - Base sintética: [`public/data/cenarios.json`](public/data/cenarios.json)
 - A tela `/cenarios` filtra os cenários e apresenta relações, sinais de risco e controles; a busca só cruza esse conteúdo fictício.
 - Fontes, limites e metodologia: [`docs/DADOS-E-METODOLOGIA.md`](docs/DADOS-E-METODOLOGIA.md)
+- Guia e instalador para Ubuntu Server: [`deploy/ollama/README.md`](deploy/ollama/README.md) e [`prepare-ubuntu.sh`](deploy/ollama/prepare-ubuntu.sh) (prepara a máquina, não provisiona uma VM na nuvem).
 - Os campos financeiros e tempos de resposta são parâmetros fictícios para a interface, sem calibração ou valor preditivo.
 
 ## Executar localmente

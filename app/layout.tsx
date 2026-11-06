@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "EU AI Act",
     "segurança da informação",
   ],
-  robots: { index: false, follow: false }, // Não indexar — aplicação interna
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

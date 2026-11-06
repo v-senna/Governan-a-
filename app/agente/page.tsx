@@ -45,7 +45,7 @@ export default function AgentePage() {
   const [elapsed, setElapsed] = useState(0);
   const [result, setResult] = useState<AgentResult | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [agentStatus, setAgentStatus] = useState<{ healthy: boolean; agentType: "mock" | "ollama"; model?: string } | null>(null);
+  const [agentStatus, setAgentStatus] = useState<{ healthy: boolean; agentType: "mock" | "ollama" | "gemini"; model?: string } | null>(null);
   const [statusMsg, setStatusMsg] = useState("Agente processando análise...");
 
   const elapsedRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -97,16 +97,16 @@ export default function AgentePage() {
     setResult(null);
     setError(null);
     setLoadingPhase("connecting");
-    setStatusMsg("Conectando ao agente Ollama...");
+    setStatusMsg(agentStatus?.agentType === "gemini" ? "Conectando à API Gemini..." : agentStatus?.agentType === "ollama" ? "Conectando ao Ollama..." : "Conectando ao agente demo...");
     startTimer();
 
     // Decide endpoint: use SSE stream if ollama, else use regular action
     const useStream = agentStatus?.agentType === "ollama";
 
     if (!useStream) {
-      // Mock agent — usar Server Action diretamente via API interna
+      // Mock e Gemini usam o endpoint server-side comum; a chave nunca chega ao navegador.
       try {
-        setStatusMsg("Mock agent processando...");
+        setStatusMsg(agentStatus?.agentType === "gemini" ? "Gemini analisando o cenário fictício..." : "Agente demo processando...");
         setLoadingPhase("waiting");
         const res = await fetch("/api/analyze", {
           method: "POST",
@@ -254,25 +254,25 @@ export default function AgentePage() {
                 padding: "0.5rem 1rem",
                 background: agentStatus.agentType === "ollama"
                   ? "rgba(34, 197, 94, 0.08)"
-                  : "rgba(6, 182, 212, 0.08)",
-                border: `1px solid ${agentStatus.agentType === "ollama" ? "rgba(34, 197, 94, 0.2)" : "rgba(6, 182, 212, 0.2)"}`,
+                  : agentStatus.agentType === "gemini" ? "rgba(139, 92, 246, 0.08)" : "rgba(6, 182, 212, 0.08)",
+                border: `1px solid ${agentStatus.agentType === "ollama" ? "rgba(34, 197, 94, 0.2)" : agentStatus.agentType === "gemini" ? "rgba(139, 92, 246, 0.2)" : "rgba(6, 182, 212, 0.2)"}`,
                 borderRadius: "10px",
               }}
             >
               <Cpu
                 size={14}
-                color={agentStatus.agentType === "ollama" ? "#22c55e" : "#06b6d4"}
+                color={agentStatus.agentType === "ollama" ? "#22c55e" : agentStatus.agentType === "gemini" ? "#a78bfa" : "#06b6d4"}
               />
               <span
                 style={{
                   fontSize: "0.8125rem",
                   fontWeight: "600",
-                  color: agentStatus.agentType === "ollama" ? "#22c55e" : "#06b6d4",
+                  color: agentStatus.agentType === "ollama" ? "#22c55e" : agentStatus.agentType === "gemini" ? "#a78bfa" : "#06b6d4",
                 }}
               >
                 {agentStatus.agentType === "ollama"
                   ? `Ollama · ${agentStatus.model ?? "LLaMA"}`
-                  : "Mock Agent · Modo Demo"}
+                  : agentStatus.agentType === "gemini" ? `Gemini API · ${agentStatus.healthy ? "chave configurada" : "chave ausente"}` : "Mock Agent · Modo Demo"}
               </span>
               <span
                 className="status-dot"
@@ -286,6 +286,12 @@ export default function AgentePage() {
           )}
         </div>
       </div>
+
+      {agentStatus?.agentType === "gemini" && (
+        <div className="glass-card" role="note" style={{ padding: "1rem", marginBottom: "1rem", borderColor: "rgba(245,158,11,.35)", color: "#fbbf24", lineHeight: 1.6 }}>
+          Gemini envia o texto do cenário ao Google. Neste modo de demonstração, use somente dados públicos ou fictícios; não envie dados pessoais, documentos internos, credenciais ou informações confidenciais.
+        </div>
+      )}
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 400px", gap: "1.5rem" }}>
         {/* Left: Input */}

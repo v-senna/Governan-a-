@@ -40,7 +40,7 @@ export interface RiskAgentResponse {
   /** Nível de risco consolidado */
   riskLevel: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
   /** Qual implementação de IA foi usada */
-  modelUsed: "mock" | "ollama";
+  modelUsed: "mock" | "ollama" | "gemini";
   /** Tempo de processamento em ms */
   processingTimeMs: number;
 }
@@ -62,5 +62,5 @@ export interface RiskAgent {
   /**
    * Identificador da implementação atual.
    */
-  readonly agentType: "mock" | "ollama";
+  readonly agentType: "mock" | "ollama" | "gemini";
 }

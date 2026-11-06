@@ -8,6 +8,7 @@
 import type { RiskAgent } from "./types";
 import { MockRiskAgent } from "./mockAgent";
 import { OllamaRiskAgent } from "./ollamaAgent";
+import { GeminiRiskAgent } from "./geminiAgent";
 
 // Singleton — uma instância por processo Node.js
 let agentInstance: RiskAgent | null = null;
@@ -20,6 +21,9 @@ export function getRiskAgent(): RiskAgent {
   if (mode === "ollama") {
     console.log("[AgentFactory] 🤖 Iniciando OllamaRiskAgent (LLaMA)");
     agentInstance = new OllamaRiskAgent();
+  } else if (mode === "gemini") {
+    console.log("[AgentFactory] ☁️ Iniciando GeminiRiskAgent (API server-side)");
+    agentInstance = new GeminiRiskAgent();
   } else {
     console.log("[AgentFactory] 🎭 Iniciando MockRiskAgent (modo seguro)");
     agentInstance = new MockRiskAgent();

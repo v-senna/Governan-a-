@@ -36,7 +36,7 @@ const AgentAnalysisSchema = z.object({
 // ─── Tipos de Resultado ───────────────────────────────────────────────────────
 
 export type AgentActionResult =
-  | { success: true; response: RiskAgentResponse; agentType: "mock" | "ollama" }
+  | { success: true; response: RiskAgentResponse; agentType: "mock" | "ollama" | "gemini" }
   | { success: false; error: string };
 
 // ─── Action Principal ──────────────────────────────────────────────────────────
@@ -68,10 +68,10 @@ export async function runAgentAnalysisAction(
   if (!isHealthy) {
     return {
       success: false,
-      error:
-        agent.agentType === "ollama"
-          ? "Ollama não está disponível. Verifique se o serviço está rodando em " +
-            (process.env.AI_OLLAMA_BASE_URL ?? "http://localhost:11434")
+      error: agent.agentType === "ollama"
+        ? "Ollama não está disponível. Verifique se o serviço está rodando em " + (process.env.AI_OLLAMA_BASE_URL ?? "http://localhost:11434")
+        : agent.agentType === "gemini"
+          ? "Gemini indisponível. Verifique se GEMINI_API_KEY está configurada no servidor."
           : "Agente indisponível",
     };
   }
@@ -129,7 +129,7 @@ export async function runAgentAnalysisAction(
 
 export async function checkAgentHealthAction(): Promise<{
   healthy: boolean;
-  agentType: "mock" | "ollama";
+  agentType: "mock" | "ollama" | "gemini";
   model?: string;
 }> {
   const agent = getRiskAgent();
@@ -137,6 +137,6 @@ export async function checkAgentHealthAction(): Promise<{
   return {
     healthy,
     agentType: agent.agentType,
-    model: agent.agentType === "ollama" ? process.env.AI_OLLAMA_MODEL : undefined,
+    model: agent.agentType === "ollama" ? process.env.AI_OLLAMA_MODEL : agent.agentType === "gemini" ? process.env.AI_GEMINI_MODEL ?? "gemini-3.8-flash" : undefined,
   };
 }

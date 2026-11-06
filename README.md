@@ -71,3 +71,18 @@ Não exponha a porta `11434` diretamente à internet. Para teste remoto, prefira
 ## Publicar como site
 
 Hospedagem estática/serverless como Netlify não mantém um processo Ollama local permanente. Publique o front-end com `mock` ou mantenha Ollama em uma máquina/servidor separado e conecte por API protegida. Não configure o navegador para chamar `localhost:11434` de quem visita o site; isso apontaria para o computador de cada visitante. Nenhum segredo deve estar no bundle público.
+
+
+## Gemini API (sem servidor Ollama)
+
+O agente pode usar Gemini pelo backend Next.js. Configure localmente em `.env.local` (não faça commit):
+
+```env
+AI_AGENT_MODE=gemini
+GEMINI_API_KEY=sua-chave-gerada-no-AI-Studio
+AI_GEMINI_MODEL=gemini-3.8-flash
+```
+
+Reinicie `npm run dev` e teste `/agente` somente com cenários fictícios. A chave fica no servidor e a aplicação a envia no cabeçalho da chamada à API, nunca ao navegador. Para hospedagem, guarde-a em variável de ambiente secreta do provedor, sem prefixo `NEXT_PUBLIC_`.
+
+A cota gratuita tem limites por modelo e as condições podem mudar. Nos serviços não pagos, o Google pode usar prompts e respostas para aprimorar produtos e permitir revisão humana; não envie dados pessoais, confidenciais ou documentos corporativos. A tela alerta sobre isso. O recurso de grounding com Google Search não está disponível na cota gratuita da API. Consulte os [termos](https://ai.google.dev/gemini-api/terms) e [preços atuais](https://ai.google.dev/gemini-api/docs/pricing).

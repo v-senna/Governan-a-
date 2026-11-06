@@ -1,0 +1,64 @@
+{
+  "version": "1.0.0",
+  "disclaimer": "Base didática com registros sintéticos. Não contém pessoas, empresas, incidentes atribuídos ou credenciais reais. Valores e tempos são parâmetros ilustrativos, não previsões nem dados de incidentes reais.",
+  "scenarios": [
+    {
+      "id": "varejo-mosaico-demo",
+      "title": "Varejo: fragmentos de cadastro e telemetria",
+      "sector": "Varejo",
+      "origin": "SINTETICO",
+      "originLabel": "Cenário fictício para demonstração",
+      "summary": "Uma loja fictícia mantém e-mails de contato em um conjunto e eventos de navegação pseudonimizados em outro. A combinação pode ampliar a capacidade de relacionar atividades a uma conta.",
+      "syntheticRecords": [
+        { "table": "contas_demo.csv", "fields": ["cliente_id fictício", "email sintético", "região ampla"] },
+        { "table": "eventos_demo.csv", "fields": ["cliente_id fictício", "categoria visitada", "data arredondada"] }
+      ],
+      "correlations": ["cliente_id liga os dois conjuntos", "horários e categorias podem revelar padrões de uso"],
+      "riskSignals": ["identificador compartilhado", "retenção sem prazo definido", "acesso amplo ao conjunto de eventos"],
+      "controls": ["remover chaves comuns quando não necessárias", "reduzir granularidade temporal", "limitar acesso por função", "definir retenção e finalidade", "revisar contratos e permissões de ferramentas de IA"],
+      "responseTargetMinutes": 60,
+      "responseTargetIsIllustrative": true,
+      "confidence": { "label": "Didática; não calibrada", "score": null },
+      "financialModel": { "lowBRL": 15000, "highBRL": 180000, "basis": "Faixa arbitrária de demonstração, definida para permitir testar gráficos. Substituir por custos internos documentados antes de uso decisório." },
+      "sources": ["SRC-ANPD-SECURITY", "SRC-LGPD", "SRC-NIST-PRIVACY"]
+    },
+    {
+      "id": "saude-minimizacao-demo",
+      "title": "Saúde: relatório de teste com campos excessivos",
+      "sector": "Saúde",
+      "origin": "SINTETICO",
+      "originLabel": "Cenário fictício; sem prontuários reais",
+      "summary": "Uma equipe prepara um resumo para uma ferramenta de IA e percebe que o arquivo contém identificadores diretos e campos clínicos que não são necessários à tarefa.",
+      "syntheticRecords": [
+        { "table": "resumo_teste.txt", "fields": ["nome fictício", "código de paciente gerado", "categoria clínica genérica"] }
+      ],
+      "correlations": ["identificador direto junto a dado de saúde pode identificar e revelar informação sensível"],
+      "riskSignals": ["dados sensíveis", "finalidade não documentada", "destinatário externo não avaliado"],
+      "controls": ["barrar envio até revisão", "remover identificadores e detalhes desnecessários", "usar dados sintéticos para protótipos", "aprovar ferramenta e contrato", "registrar finalidade e retenção"],
+      "responseTargetMinutes": 15,
+      "responseTargetIsIllustrative": true,
+      "confidence": { "label": "Didática; não calibrada", "score": null },
+      "financialModel": { "lowBRL": 25000, "highBRL": 250000, "basis": "Faixa arbitrária de demonstração, não derivada de multa, pesquisa ou caso real." },
+      "sources": ["SRC-ANPD-SECURITY", "SRC-LGPD", "SRC-NIST-PRIVACY"]
+    },
+    {
+      "id": "industria-segredo-demo",
+      "title": "Indústria: documentação técnica enviada sem revisão",
+      "sector": "Indústria",
+      "origin": "SINTETICO",
+      "originLabel": "Cenário fictício; sem propriedade intelectual real",
+      "summary": "Um colaborador pede ajuda para resumir um documento fictício de manutenção que inclui uma chave de API inventada e detalhes de processo genéricos.",
+      "syntheticRecords": [
+        { "table": "manual_demo.md", "fields": ["etapas genéricas", "chave de API inválida reservada para exemplo", "nome de máquina fictício"] }
+      ],
+      "correlations": ["documentação técnica mais segredo de autenticação pode facilitar acesso indevido"],
+      "riskSignals": ["segredo embutido em documento", "propriedade intelectual", "falta de classificação"],
+      "controls": ["detectar e bloquear credenciais", "revogar segredo exposto em exercício", "classificar documentos", "usar ambiente privado aprovado", "revisar logs de acesso"],
+      "responseTargetMinutes": 30,
+      "responseTargetIsIllustrative": true,
+      "confidence": { "label": "Didática; não calibrada", "score": null },
+      "financialModel": { "lowBRL": 10000, "highBRL": 500000, "basis": "Faixa arbitrária para demonstração; não representa estimativa atuarial nem preço de incidente." },
+      "sources": ["SRC-CERT-BR", "SRC-NIST-CSF", "SRC-NIST-PRIVACY"]
+    }
+  ]
+}

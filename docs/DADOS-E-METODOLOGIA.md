@@ -1,48 +1,20 @@
-# Dados públicos, cenários sintéticos e metodologia
+# Dados e limites da demonstração
 
-## O que a demonstração usa
+## Conteúdo
 
-A base `public/data/cenarios.json` contém três cenários fictícios (varejo, saúde e indústria). Todos os nomes, IDs, tabelas e dados são gerados para a demonstração; não foram copiados de indivíduos ou empresas. Os campos descrevem classes de dados, não valores pessoais reais.
+`public/data/cenarios.json` contém exemplos sintéticos de varejo, saúde e indústria. Os registros, nomes, identificadores e tabelas foram inventados para a demonstração; não representam pessoas ou empresas.
 
-Os cenários mostram correlações de forma didática: uma chave comum entre tabelas, granularidade temporal e combinação de identificadores com atributos sensíveis. A aplicação não consulta pessoas, perfis ou bases vazadas. “Busca e correlação” significa cruzar apenas os dados sintéticos carregados no projeto.
+A tela pesquisa somente esse arquivo local. Não recebe uploads, não faz scraping e não consulta pessoas ou bases vazadas. As relações são hipóteses didáticas escritas para os exemplos, não resultados de investigação nem evidência de exploração real.
 
-## Como usar fontes públicas
+## Fontes de boas práticas
 
-Use fontes públicas para fundamentar controles e conceitos, não para republicar dados pessoais. Prefira documentos normativos, guias, relatórios agregados e incidentes descritos em comunicados oficiais. Registre para cada fonte: URL, entidade autora, data de publicação/acesso, trecho/parâmetro usado, licença/termos e limites. Não faça scraping de pessoas, credenciais ou bases expostas.
+- [Guia de Segurança da Informação da ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes/guia-orientativo-sobre-seguranca-da-informacao-para-agentes-de-tratamento-de-pequeno-porte) — medidas administrativas e técnicas.
+- [Lei Geral de Proteção de Dados](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm) — referência legal primária; a aplicação não faz parecer jurídico.
+- [Cartilha CERT.br](https://cartilha.cert.br/) — orientações gerais de segurança.
+- [NIST Privacy Framework](https://www.nist.gov/privacy-framework) e [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework) — referências para gestão de riscos e controles.
 
-| ID | Fonte | Uso no projeto |
-|---|---|---|
-| SRC-ANPD-SECURITY | [Guia de segurança da informação da ANPD para agentes de tratamento de pequeno porte](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes/guia-orientativo-sobre-seguranca-da-informacao-para-agentes-de-tratamento-de-pequeno-porte) | Referência orientativa para medidas técnicas/administrativas, checklist e minimização. |
-| SRC-LGPD | [Lei nº 13.709/2018 — LGPD](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm) | Texto legal primário; consultar redação vigente e contexto antes de qualquer conclusão jurídica. |
-| SRC-CERT-BR | [Cartilha de Segurança para Internet — CERT.br](https://cartilha.cert.br/) | Educação e boas práticas gerais de segurança. |
-| SRC-NIST-PRIVACY | [NIST Privacy Framework](https://www.nist.gov/privacy-framework) | Vocabulário e estrutura de gestão de risco de privacidade. |
-| SRC-NIST-CSF | [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework) | Organização de atividades de governança e resposta. |
+Essas fontes fundamentam sugestões de controle. Não validam relações causais, valores financeiros, probabilidades nem tempo de resposta. O prazo mostrado em um cenário é somente uma meta de exercício.
 
-Essas referências não validam os valores monetários, tempos-alvo, severidades ou relações causais do demo.
+## Limites de uso
 
-## Cálculo, confiança e resposta
-
-A versão simplificada não exibe números financeiros. O simulador legado usa custos base por registro, percentuais de centro de custo e fatores de cauda que não foram calibrados com dados de incidentes; por isso, não devem ser exibidos como previsão, mediana, percentil ou multa. Uma estimativa corporativa exigiria custos internos auditáveis, premissas revisadas por especialistas e incerteza documentada.
-
-Não há pontuação de confiança calibrada. O tempo mostrado na ficha de cada cenário é uma meta didática de exercício; não prevê detecção nem define prazo regulatório. A saída de um LLM, se for habilitada em outro ambiente, deve ser tratada como sugestão para revisão humana.
-
-## Casos reais
-
-Uma próxima versão pode acrescentar casos públicos reais somente com uma fonte primária (ex.: comunicado do regulador, relatório técnico ou declaração oficial da organização). Separar fatos confirmados de alegações e inferências, citar a fonte em cada afirmação e evitar associar números financeiros a uma causa sem evidência. Não reutilizar dados pessoais publicados em incidentes.
-
-## Segurança da demonstração
-
-- Não envie documentos reais, dados pessoais, segredos ou credenciais para a demonstração pública.
-- Deixe o modo `mock` como padrão no site público; o modo Ollama fica no servidor/local do operador.
-- Não coloque tokens, URLs privadas nem chaves em variáveis `NEXT_PUBLIC_*` ou no repositório.
-- Um detector de padrões é um filtro de apoio, não uma garantia contra vazamento. Adote bloqueio por padrão para conteúdo sensível e revisão humana.
-
-## Limites de custo e hospedagem do Ollama
-
-Ollama local não cobra tokens, pois o cálculo usa o hardware do operador. Há custos indiretos de computador, energia, armazenamento, rede e disponibilidade. Ollama Cloud é serviço remoto medido por tokens/créditos; confira a página oficial de preços antes de integrar e não envie informação confidencial sem avaliação contratual e de privacidade. Não há garantia de servidor público gratuito, permanente e dimensionado para visitantes.
-
-Para disponibilizar uma demo sem custo variável de inferência, mantenha `mock` no site e rode o Ollama apenas localmente para testes. Se expuser uma instância própria para uma turma pequena, mantenha-a em rede privada ou atrás de uma camada com autenticação, autorização e limites de requisição; nunca publique a porta 11434 aberta. Isso não é solução de produção multiempresa e depende de sua máquina ficar ligada.
-
-## Uso opcional da Gemini API
-
-A integração chama Gemini somente no backend e precisa de `GEMINI_API_KEY` definida em `.env.local` local ou no gerenciador de segredos da hospedagem. Não inclua a chave em Git, código cliente, `NEXT_PUBLIC_*`, screenshots ou logs. O modo gratuito está sujeito a quotas e às condições do Google; conteúdo enviado por serviços não pagos pode ser usado para melhorar produtos e revisado por pessoas. Use exclusivamente conteúdo público ou sintético nesse modo. Para qualquer dado empresarial real, avalie antes contrato, região, retenção e controles do serviço pago/Google Cloud com a área de privacidade e segurança. O grounding de busca da web é um recurso separado, sujeito a disponibilidade e preço, e não está na cota gratuita da Gemini Developer API conforme a tabela de preços consultada.
+Não envie documentos reais, dados pessoais, credenciais ou informações confidenciais. A demonstração não identifica indivíduos, não mede probabilidade de incidente e não estima perdas. Para acrescentar casos reais, use fontes primárias, separe fatos de inferências e não republice dados pessoais.

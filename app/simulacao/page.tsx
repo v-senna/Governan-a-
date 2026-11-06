@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import {
   Zap,
   AlertTriangle,
@@ -12,9 +13,16 @@ import {
 } from "lucide-react";
 import { runSimulationAction } from "@/actions/simulationActions";
 import type { FinancialRiskResult, RecordCategory } from "@/lib/financialRiskEngine";
-import { RECORD_CATEGORIES, formatBRL, formatCompact, COST_CENTERS } from "@/lib/financialRiskEngine";
+import { RECORD_CATEGORIES, formatBRL, formatCompact } from "@/lib/financialRiskEngine";
 
 type SimulationResult = FinancialRiskResult & { simulationId?: string };
+type SimulationFormState = {
+  description: string;
+  sector: string;
+  exchangeRateUSD: number;
+  annualRevenueBRL: number;
+  records: Record<RecordCategory, number>;
+};
 
 const SECTORS = [
   "Financeiro / Bancário",
@@ -145,8 +153,8 @@ function SimulationForm({
   onRecordChange,
   onSubmit,
 }: {
-  form: any;
-  setForm: any;
+  form: SimulationFormState;
+  setForm: Dispatch<SetStateAction<SimulationFormState>>;
   totalRecords: number;
   isPending: boolean;
   error: string | null;
@@ -190,7 +198,7 @@ function SimulationForm({
                 placeholder="Ex: Banco de dados de clientes exposto por configuração incorreta de bucket S3. Dados acessíveis publicamente por 72h..."
                 value={form.description}
                 onChange={(e) =>
-                  setForm((prev: any) => ({ ...prev, description: e.target.value }))
+                  setForm((prev) => ({ ...prev, description: e.target.value }))
                 }
               />
             </div>
@@ -202,7 +210,7 @@ function SimulationForm({
                   className="form-input"
                   value={form.sector}
                   onChange={(e) =>
-                    setForm((prev: any) => ({ ...prev, sector: e.target.value }))
+                    setForm((prev) => ({ ...prev, sector: e.target.value }))
                   }
                   style={{ cursor: "pointer" }}
                 >
@@ -224,7 +232,7 @@ function SimulationForm({
                   max="50"
                   value={form.exchangeRateUSD}
                   onChange={(e) =>
-                    setForm((prev: any) => ({
+                    setForm((prev) => ({
                       ...prev,
                       exchangeRateUSD: parseFloat(e.target.value) || 5.6,
                     }))
@@ -247,7 +255,7 @@ function SimulationForm({
                 min="0"
                 value={form.annualRevenueBRL}
                 onChange={(e) =>
-                  setForm((prev: any) => ({
+                  setForm((prev) => ({
                     ...prev,
                     annualRevenueBRL: parseFloat(e.target.value) || 100_000_000,
                   }))
@@ -288,7 +296,7 @@ function SimulationForm({
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            {(Object.entries(RECORD_CATEGORIES) as [RecordCategory, any][]).map(
+            {(Object.entries(RECORD_CATEGORIES) as [RecordCategory, (typeof RECORD_CATEGORIES)[RecordCategory]][]).map(
               ([key, meta]) => {
                 const costBRL = meta.baseCostUSD * form.exchangeRateUSD;
                 const recordCount = form.records[key];

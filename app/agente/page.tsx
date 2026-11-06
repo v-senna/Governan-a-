@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback } from "react";
 import { Bot, Send, RefreshCw, Shield, AlertTriangle, CheckCircle, Cpu, ChevronRight, Zap, Clock } from "lucide-react";
 import { checkAgentHealthAction } from "@/actions/agentActions";
-import { RECORD_CATEGORIES, formatCompact } from "@/lib/financialRiskEngine";
+import { RECORD_CATEGORIES } from "@/lib/financialRiskEngine";
 import type { ComplianceFlag } from "@/lib/ai/types";
 import type { RecordCategory } from "@/lib/financialRiskEngine";
 import { useEffect } from "react";
@@ -385,7 +385,7 @@ export default function AgentePage() {
                   Registros por Categoria
                 </label>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
-                  {(Object.entries(RECORD_CATEGORIES) as [RecordCategory, any][]).map(([key, meta]) => (
+                  {(Object.entries(RECORD_CATEGORIES) as [RecordCategory, (typeof RECORD_CATEGORIES)[RecordCategory]][]).map(([key, meta]) => (
                     <div key={key}>
                       <div
                         style={{

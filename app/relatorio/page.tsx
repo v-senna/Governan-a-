@@ -5,7 +5,7 @@ import { FileText, Zap, Bot, Download, RefreshCw, ChevronRight, TrendingUp } fro
 import { runSimulationAction } from "@/actions/simulationActions";
 import { runAgentAnalysisAction } from "@/actions/agentActions";
 import type { FinancialRiskResult, RecordCategory } from "@/lib/financialRiskEngine";
-import { RECORD_CATEGORIES, formatBRL, formatCompact } from "@/lib/financialRiskEngine";
+import { formatCompact } from "@/lib/financialRiskEngine";
 import type { RiskAgentResponse } from "@/lib/ai/types";
 
 const DEFAULT_RECORDS: Partial<Record<RecordCategory, number>> = {

@@ -11,6 +11,7 @@ import {
   FileText,
   AlertTriangle,
   Activity,
+  Search,
 } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -19,6 +20,12 @@ const NAV_ITEMS = [
     label: "Dashboard",
     icon: BarChart3,
     description: "Visão geral",
+  },
+  {
+    href: "/cenarios",
+    label: "Cenários",
+    icon: Search,
+    description: "Buscar correlações fictícias",
   },
   {
     href: "/simulacao",

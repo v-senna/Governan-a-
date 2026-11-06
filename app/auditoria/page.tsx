@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useTransition } from "react";
-import { ClipboardList, CheckCircle, XCircle, RefreshCw, Shield, Clock, Hash } from "lucide-react";
-import { getAuditLogsAction, verifyChainIntegrityAction } from "@/actions/auditActions";
+import { ClipboardList, CheckCircle, XCircle, RefreshCw, Shield, Clock } from "lucide-react";
+import { getAuditLogsAction } from "@/actions/auditActions";
 import type { AuditEvent, AuditChainVerification } from "@/lib/auditLogger";
 
 const EVENT_LABELS: Record<string, { label: string; color: string }> = {

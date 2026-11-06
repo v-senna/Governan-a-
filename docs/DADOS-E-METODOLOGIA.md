@@ -36,3 +36,9 @@ Uma próxima versão pode acrescentar casos públicos reais somente com uma font
 - Deixe o modo `mock` como padrão no site público; o modo Ollama fica no servidor/local do operador.
 - Não coloque tokens, URLs privadas nem chaves em variáveis `NEXT_PUBLIC_*` ou no repositório.
 - Um detector de padrões é um filtro de apoio, não uma garantia contra vazamento. Adote bloqueio por padrão para conteúdo sensível e revisão humana.
+
+## Limites de custo e hospedagem do Ollama
+
+Ollama local não cobra tokens, pois o cálculo usa o hardware do operador. Há custos indiretos de computador, energia, armazenamento, rede e disponibilidade. Ollama Cloud é serviço remoto medido por tokens/créditos; confira a página oficial de preços antes de integrar e não envie informação confidencial sem avaliação contratual e de privacidade. Não há garantia de servidor público gratuito, permanente e dimensionado para visitantes.
+
+Para disponibilizar uma demo sem custo variável de inferência, mantenha `mock` no site e rode o Ollama apenas localmente para testes. Se expuser uma instância própria para uma turma pequena, mantenha-a em rede privada ou atrás de uma camada com autenticação, autorização e limites de requisição; nunca publique a porta 11434 aberta. Isso não é solução de produção multiempresa e depende de sua máquina ficar ligada.

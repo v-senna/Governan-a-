@@ -21,7 +21,7 @@ export class MockRiskAgent implements RiskAgent {
     // Simular latência realista de processamento
     await new Promise((resolve) => setTimeout(resolve, 800 + Math.random() * 400));
 
-    const { calculatedRisk, recordsBreakdown, sector = "Geral" } = request;
+    const { calculatedRisk, sector = "Geral" } = request;
     const { riskLevel, medianLossBRL, tailRiskP95BRL, totalRecords, categoryBreakdown } = calculatedRisk;
 
     // ─── Análise Narrativa ──────────────────────────────────────────────────

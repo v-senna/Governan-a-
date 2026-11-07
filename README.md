@@ -1,28 +1,30 @@
-# RiskGov — demonstração educativa
+# Governança de Riscos — Laboratório de cenários
 
-A versão enxuta foca em um fluxo: pesquisar cenários sintéticos, entender como os dados se conectam e consultar medidas de prevenção. Ela não analisa arquivos nem dados de pessoas.
+Demonstração educativa para explorar como eventos públicos e dados fictícios podem orientar conversas sobre risco, impacto operacional e boas práticas. A interface separa fatos documentados das simulações didáticas.
 
-## Executar
+## Fluxo principal
+
+- A página inicial apresenta casos públicos com links para as fontes primárias.
+- A pessoa seleciona um caso para abrir um cenário sintético relacionado.
+- A amostra fictícia pode ser gerada novamente localmente.
+- O impacto em reais é calculado por premissas editáveis: impacto operacional assumido por dia × dias de indisponibilidade.
+- A rota `/cenarios` abre diretamente a simulação.
+
+## Executar localmente
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Abra `http://localhost:3000` e escolha **Explorar cenários**. A busca é local e usa somente [`public/data/cenarios.json`](public/data/cenarios.json). As fontes públicas e os limites metodológicos estão em [`docs/DADOS-E-METODOLOGIA.md`](docs/DADOS-E-METODOLOGIA.md).
+Acesse `http://localhost:3000`.
 
-## Escopo desta versão
+## Limites da demonstração
 
-- Início apresenta o objetivo e leva direto à exploração.
-- Cenários permite buscar por texto/setor e consultar dados sintéticos, correlações e controles.
-- Não mostra estimativas financeiras, níveis de confiança ou prazos reais: os valores do simulador antigo não estavam calibrados. O tempo exibido nos cenários é apenas uma meta didática.
-- Não envie documentos reais, dados pessoais, credenciais ou informações confidenciais.
+Os fatos publicados aparecem com fonte. Ambientes, registros, controles e valores em reais na simulação são fictícios. O resultado não é dado do incidente público, previsão, probabilidade ou estimativa calibrada de prejuízo. A aplicação não recebe upload, não chama API de IA e não analisa documentos. A geração de registros é local e demonstrativa.
 
-As telas de análise por IA, simulação financeira, auditoria e relatório saíram da navegação principal neste rascunho de simplificação; continuam na branch principal para comparação e não fazem parte do fluxo simplificado.
+Não inclua documentos reais, dados pessoais, credenciais ou informações confidenciais.
 
-## Verificação local
+## Netlify
 
-```bash
-npm run lint
-npm run build
-```
+O projeto continua em Next.js. Conecte a branch revisada ao Netlify após aprovar o preview. Esta demonstração não precisa de chaves ou variáveis de API.

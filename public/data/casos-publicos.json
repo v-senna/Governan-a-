@@ -1,0 +1,58 @@
+{
+  "version": "1.0.0",
+  "disclaimer": "Os fatos públicos e as simulações didáticas são apresentados separadamente. As amostras de dados são sintéticas e não representam pessoas, empresas ou registros reais.",
+  "cases": [
+    {
+      "id": "mgm-2023",
+      "name": "MGM Resorts",
+      "country": "Estados Unidos",
+      "year": 2023,
+      "category": "interrupção cibernética",
+      "fact": "≈ US$ 100 milhões",
+      "factDescription": "A empresa estimou impacto negativo de aproximadamente US$ 100 milhões no Adjusted Property EBITDAR em setembro de 2023.",
+      "sourceName": "SEC — Form 8-K",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/789570/000119312523251667/d461062d8k.htm",
+      "sampleData": {
+        "accountPrefix": "servico-demo-",
+        "events": ["fila de pedidos", "reserva", "atendimento"],
+        "contexts": ["região ampla", "serviço interno", "turno agrupado"]
+      },
+      "simulation": {
+        "title": "Risco operacional no varejo",
+        "subtitle": "Um exemplo fictício inspirado no tipo de impacto operacional divulgado em incidentes públicos.",
+        "dailyImpactPerDayBrl": 800000,
+        "controls": [
+          "Relacionar eventos apenas quando houver finalidade de negócio.",
+          "Limitar permissões durante a resposta ao incidente.",
+          "Definir responsáveis, prazos e critérios de recuperação."
+        ]
+      }
+    },
+    {
+      "id": "capital-one-2019",
+      "name": "Capital One",
+      "country": "Estados Unidos",
+      "year": 2019,
+      "category": "exposição de dados",
+      "fact": "Mais de 100 milhões de pessoas",
+      "factDescription": "O Departamento de Justiça dos EUA informou que os dados de mais de 100 milhões de pessoas foram obtidos no incidente.",
+      "sourceName": "DOJ — comunicado oficial",
+      "sourceUrl": "https://www.justice.gov/usao-wdwa/pr/former-seattle-tech-worker-convicted-wire-fraud-and-computer-intrusions",
+      "sampleData": {
+        "accountPrefix": "perfil-demo-",
+        "events": ["cadastro", "consulta", "transação agrupada"],
+        "contexts": ["região ampla", "faixa genérica", "período arredondado"]
+      },
+      "simulation": {
+        "title": "Exposição de dados em serviços financeiros",
+        "subtitle": "Exemplo fictício de minimização e controle de acesso, inspirado em fatos públicos sem reutilizar dados reais.",
+        "dailyImpactPerDayBrl": 350000,
+        "controls": [
+          "Combinar identificadores somente com finalidade definida.",
+          "Conceder acesso pelo menor privilégio necessário.",
+          "Avaliar exposição e aplicar o plano de resposta."
+        ]
+      }
+    }
+  ]
+}
